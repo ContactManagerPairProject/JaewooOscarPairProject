@@ -72,7 +72,7 @@ public class ContactManager {
                 String[] parts = line.split("\\|");
                 String name = parts[0].trim();
                 String phone = parts[1].trim();
-                Contact contact = new contact(name, phone);
+                Contact contact = new Contact(name, phone);
                 contacts.add(contact);
             }
             fileScanner.close();
@@ -85,14 +85,14 @@ public class ContactManager {
 
     private static void saveContacts() {
         try {
-            PrintWriter write = new PrintWriter(contactsFile);
+            PrintWriter writer = new PrintWriter(contactsFile);
             for (Contact contact : contacts) {
-                writer.println(contact.getName() + "|" + contact.getPhoneNumber());
+                writer.println(contact.getName() + " | " + contact.getPhoneNumber());
             }
             writer.close();
-            System.out.println("contacts saved to file.");
+            System.out.println("Contacts saved to file.");
         } catch (FileNotFoundException e) {
-            System.out.println("Error saving Contacts to file");
+            System.out.println("Error saving contacts to file.");
         }
     }
 
@@ -128,17 +128,17 @@ public class ContactManager {
     }
 
     private static void searchContacts() {
-        System.out.println("Enter name to search: ");
+        System.out.print("Enter name to search: ");
         String name = scanner.nextLine();
         boolean found = false;
-        for (Contact contact : contacts) ;
-        if (Contact.getName().equalsIgnoreCase(name)) {
-            System.out.println(Contact.toString());
-            found = true;
+        for (Contact contact : contacts) {
+            if (contact.getName().equalsIgnoreCase(name)) {
+                System.out.println(contact.toString());
+                found = true;
             }
         }
-        if(!found){
-            System.out.println("No contacts found with that name" + name);
+        if (!found) {
+            System.out.println("No contacts found with name " + name);
         }
     }
     private static void deleteContact() {
