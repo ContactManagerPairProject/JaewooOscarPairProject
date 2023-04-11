@@ -102,8 +102,42 @@ public class ContactManager {
         System.out.println("5. Exit");
         System.out.println(" Enter an option (1, 2, 3, 4, or 5");
         int choice = scanner.nextInt();
-        scanner.nextLine()
+        scanner.nextLine();
                 return choice;
+
+    }
+
+private static void viewContacts(){
+    System.out.println("Name | Phone number");
+    System.out.println("-------------------");
+    for (Contact contact : contacts) {
+        System.out.println(contact.toString());
+    }
+    }
+
+private static void addContact() {
+    System.out.println("Enter name: ");
+    String name = scanner.nextLine();
+    System.out.println("Enter phone number: ");
+    String phone = scanner.nextLine();
+    Contact contact = new Contact(name, phone);
+    contacts.add(contact);
+    System.out.println("Contact added.");
+}
+}
+
+private static void searchContacts(){
+    System.out.println("Enter name to search: ");
+    String name = scanner.nextLine();
+    boolean found = false;
+    if(contact.getName(). equalsIgnoreCase(name)) {
+        System.out.println(contact.toString());
+        fpund = true;
+    }
+    }
+    if(!found){
+    System.out.println("No contacts found with that name "+name);
+    }
     }
 
 
