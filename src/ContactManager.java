@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+//Defining the contact class which represents a contact with a name and phone number
 class Contact{
     private String name;
     private String phone;
@@ -13,20 +14,28 @@ class Contact{
         this.name = name;
         this.phone = phone;
     }
+    //Getter method for the name property
     public String getName(){
         return name;
     }
+
+    //getter method for the phone property
     public String getPhoneNumber() {
         return phone;
     }
+
+    //Setter method for the phone property
     public void setPhone(String phone){
         this.phone=phone;
     }
+
+    //override the toString method to return a string representation of the contact object
     public String toString() {
         return name + "|" + phone;
     }
 }
 
+//Defining the ContactManager class
 public class ContactManager {
 
     private static List<Contact> contacts = new ArrayList<Contact>();
@@ -35,6 +44,7 @@ public class ContactManager {
 
     private static Scanner scanner = new Scanner(System.in);
 
+    //Main method which displays a menu and handles user input
     public static void main(String[] args) {
         loadContacts();
         int choice = 0;
@@ -61,13 +71,16 @@ public class ContactManager {
                     break;
             }
         } while (choice != 5);
+        //Save contacts to file when program exits
         saveContacts();
     }
 
+    //Load contacts from file
     private static void loadContacts() {
         try {
             Scanner fileScanner = new Scanner(contactsFile);
             while (fileScanner.hasNextLine()) {
+                //Read each line from the file and split it into name and phone number
                 String line = fileScanner.nextLine();
                 String[] parts = line.split("\\|");
                 String name = parts[0].trim();
@@ -83,10 +96,12 @@ public class ContactManager {
         }
     }
 
+    //Save contacts to file
     private static void saveContacts() {
         try {
             PrintWriter writer = new PrintWriter(contactsFile);
             for (Contact contact : contacts) {
+                //Write each contact to the file in the format "name | phone number"
                 writer.println(contact.getName() + " | " + contact.getPhoneNumber());
             }
             writer.close();
@@ -96,6 +111,7 @@ public class ContactManager {
         }
     }
 
+    //Display menu options to the user and returns their choice as an integer
     private static int showMenu() {
         System.out.println("1. View contacts.");
         System.out.println("2. Add a new contact");
@@ -109,6 +125,7 @@ public class ContactManager {
 
     }
 
+    //Displays all contacts in the list of contacts
     private static void viewContacts() {
         System.out.println("Name | Phone number");
         System.out.println("-------------------");
@@ -117,6 +134,8 @@ public class ContactManager {
         }
     }
 
+    //Prompts the user to enter a new contact's name and phone number,creates
+    //a new Contact object with this information and adds it to the list of contacts.
     private static void addContact() {
         System.out.println("Enter name: ");
         String name = scanner.nextLine();
@@ -127,6 +146,8 @@ public class ContactManager {
         System.out.println("Contact added.");
     }
 
+    //Prompts the user to enter a name to search for, searches the
+    //list of contacts for a contact with that name, and displays any contacts found.
     private static void searchContacts() {
         System.out.print("Enter name to search: ");
         String name = scanner.nextLine();
@@ -141,6 +162,10 @@ public class ContactManager {
             System.out.println("No contacts found with name " + name);
         }
     }
+
+    //Prompts the user to enter a name of a contact to delete, searches the list of contacts
+    //for a contact with that name, removes the contact if found, and displays a message
+    //indicating whether or not the contact was deleted.
     private static void deleteContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Eneter the name of the contact you want to delete:");
