@@ -76,11 +76,11 @@ public class ContactManager {
     }
 
     //Load contacts from file
+    ////Read each line from the file and split it into name and phone number
     private static void loadContacts() {
         try {
             Scanner fileScanner = new Scanner(contactsFile);
             while (fileScanner.hasNextLine()) {
-                //Read each line from the file and split it into name and phone number
                 String line = fileScanner.nextLine();
                 String[] parts = line.split("\\|");
                 String name = parts[0].trim();
@@ -97,11 +97,11 @@ public class ContactManager {
     }
 
     //Save contacts to file
+    ////Write each contact to the file in the format "name | phone number"
     private static void saveContacts() {
         try {
             PrintWriter writer = new PrintWriter(contactsFile);
             for (Contact contact : contacts) {
-                //Write each contact to the file in the format "name | phone number"
                 writer.println(contact.getName() + " | " + contact.getPhoneNumber());
             }
             writer.close();
